@@ -7,11 +7,12 @@ import {
   Select,
   Flex,
   Button,
+  Stack,
 } from "@chakra-ui/react";
 function SearchForm() {
   return (
-    <Flex wrap="wrap" paddingTop="3rem">
-      <Box flex="1" paddingRight="1rem">
+    <Stack direction={["column", "row"]}>
+      <Box flex="1">
         <form>
           <Flex>
             <FormControl>
@@ -52,7 +53,7 @@ function SearchForm() {
           </Flex>
         </form>
       </Box>
-    </Flex>
+    </Stack>
   );
 }
 
