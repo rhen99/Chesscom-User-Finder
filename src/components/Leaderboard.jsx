@@ -8,21 +8,28 @@ import {
   TabPanel,
   Center,
   Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import BlitzList from "./BlitzList";
 import BulletList from "./BulletList";
 import PuzzleRushList from "./PuzzleRushList";
 import RapidList from "./RapidList";
-function Leaderboard({ leaderBoardData }) {
+function Leaderboard({ leaderBoardData, error }) {
   let hasLeaderBoardData = leaderBoardData !== null;
+  let hasErrorMessage = error !== null;
   return (
     <Box paddingTop="3rem">
       <Heading>Leaderboard</Heading>
-      {!hasLeaderBoardData ? (
-        <Center>
-          <Spinner color="green.500" />
-        </Center>
-      ) : (
+      {hasErrorMessage ? (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>{error.status}</AlertTitle>
+          <AlertDescription>{error.message}</AlertDescription>
+        </Alert>
+      ) : hasLeaderBoardData ? (
         <Tabs>
           <TabList>
             <Tab>Blitz</Tab>
@@ -45,6 +52,10 @@ function Leaderboard({ leaderBoardData }) {
             </TabPanel>
           </TabPanels>
         </Tabs>
+      ) : (
+        <Center>
+          <Spinner color="green.500" />
+        </Center>
       )}
     </Box>
   );
